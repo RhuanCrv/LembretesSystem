@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Meus Lembretes</title>
+
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <main class="container">
+            <header class="header">
+                <div>
+                    <h1>Meus Lembretes</h1>
+                    <p>Gerenciamento de lembretes</p>
+                </div>
+
+                <div class="form-actions">
+                    <button id="btnImprimir" type="button" class="btn btn-secondary">Imprimir</button>
+                    <button id="btnNovo" type="button" class="btn btn-primary">+ Novo lembrete</button>
+                </div>
+            </header>
+
+            <!-- FORMULÁRIO -->
+            <section id="formulario" class="card hidden">
+                <h2 id="tituloFormulario">Novo lembrete</h2>
+
+                <form id="formLembrete" novalidate>
+                    <input type="hidden" id="lembreteId">
+
+                    <div class="form-group">
+                        <label for="descricao">Descrição *</label>
+                        <input
+                            type="text"
+                            id="descricao"
+                            placeholder="Digite o lembrete..."
+                            maxlength="500"
+                            required
+                        >
+                        <small id="erroDescricao" class="field-error hidden">A descrição é obrigatória.</small>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="btnCancelar" class="btn btn-secondary">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- FILTROS -->
+            <section class="card">
+                <div class="filtro">
+                    <div class="form-group filtro-descricao">
+                        <label for="filtroDescricao">Descrição</label>
+                        <input type="text" id="filtroDescricao" placeholder="Pesquisar por descrição...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataCadastroInicial">Cadastro inicial</label>
+                        <input type="date" id="dataCadastroInicial">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataCadastroFinal">Cadastro final</label>
+                        <input type="date" id="dataCadastroFinal">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataAtualizacaoInicial">Atualização inicial</label>
+                        <input type="date" id="dataAtualizacaoInicial">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataAtualizacaoFinal">Atualização final</label>
+                        <input type="date" id="dataAtualizacaoFinal">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tamanhoPagina">Registros por página</label>
+                        <select id="tamanhoPagina">
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="20">20</option>
+                        </select>
+                    </div>
+
+                    <div class="filtro-acoes">
+                        <button id="btnLimparFiltros" type="button" class="btn btn-secondary">Limpar</button>
+                        <button id="btnFiltrar" type="button" class="btn btn-primary">Filtrar</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LISTAGEM -->
+            <section class="card">
+                <div class="table-header">
+                    <h2>Lembretes</h2>
+                    <span id="totalRegistros">0 registros</span>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-ordem="Descricao">
+                                    Descrição <span class="sort-indicator" id="sort-Descricao"></span>
+                                </th>
+                                <th class="sortable" data-ordem="DataCadastro">
+                                    Cadastro <span class="sort-indicator" id="sort-DataCadastro"></span>
+                                </th>
+                                <th class="sortable" data-ordem="DataAtualizacao">
+                                    Atualização <span class="sort-indicator" id="sort-DataAtualizacao"></span>
+                                </th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="listaLembretes"></tbody>
+                    </table>
+
+                    <div id="mensagemVazia" class="empty hidden">Nenhum lembrete encontrado.</div>
+                </div>
+
+                <!-- PAGINAÇÃO -->
+                <div class="pagination">
+                    <button id="btnAnterior" type="button" class="btn btn-secondary">← Anterior</button>
+                    <span id="paginaAtual">Página 1</span>
+                    <button id="btnProximo" type="button" class="btn btn-secondary">Próxima →</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- TOAST -->
+        <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+        <script src="js/app.js"></script>
+    </body>
+</html>
